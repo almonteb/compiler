@@ -1,6 +1,6 @@
 package AST;
 
-public class ExpressionInterpreter implements Visitor<Integer>
+public class ExpressionInterpreter implements Visitor<Object>
 {
 	SymbolTable symbols;
 
@@ -9,60 +9,65 @@ public class ExpressionInterpreter implements Visitor<Integer>
 		this.symbols = symbols;
 	}
 
-	public Integer visit(Id id)
+	public Object visit(Id id)
 	{
 		if (symbols.containsKey(id.id))
-			return (Integer) symbols.get(id.id);
+			return symbols.get(id.id);
 		else
 			return 0;
 	}
 
-	public Integer visit(Operator op)
+	public Object visit(Operator op)
 	{
 		return null;
 	}
 
-	public Integer visit(Plus op)
+	public Object visit(Plus op)
 	{
-		return op.left.accept(this) + op.right.accept(this);
+		return (Integer) op.left.accept(this) + (Integer) op.right.accept(this);
 	}
 
-	public Integer visit(Minus op)
+	public Object visit(Minus op)
 	{
-		return op.left.accept(this) - op.right.accept(this);
+		return (Integer) op.left.accept(this) - (Integer) op.right.accept(this);
 	}
 
-	public Integer visit(Times op)
+	public Object visit(Times op)
 	{
-		return op.left.accept(this) * op.right.accept(this);
+		return (Integer) op.left.accept(this) * (Integer) op.right.accept(this);
 	}
 
-	public Integer visit(Divide op)
+	public Object visit(Divide op)
 	{
-		return op.left.accept(this) * op.right.accept(this);
+		return (Integer) op.left.accept(this) * (Integer) op.right.accept(this);
 	}
 
-	public Integer visit(Number num)
+	public Object visit(Number num)
 	{
 		return num.n;
 	}
+	
+	public Object visit(Chars str)
+	{
+		return str.s;
+	}
 
-	public Integer visit(Loop loop)
+	public Object visit(Loop loop)
 	{
 		return null;
 	}
 
-	public Integer visit(Branch branch)
+	public Object visit(Branch branch)
 	{
 		return null;
 	}
 
-	public Integer visit(Block block)
+	public Object visit(Block block)
 	{
 		return null;
 	}
 
-	public Integer visit(Assign assign)
+	public Object visit(Assign assign)
 	{
 		return null;
 	}

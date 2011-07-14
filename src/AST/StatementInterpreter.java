@@ -9,7 +9,7 @@ public class StatementInterpreter implements Visitor<Void>
 	public Void visit(Loop loop)
 	{
 		symbols = symbols.beginScope();
-		while (loop.predicate.accept(eval) != 0)
+		while (Integer.parseInt(loop.predicate.accept(eval).toString()) != 0)
 		{
 			loop.body.accept(this);
 		}
@@ -19,7 +19,7 @@ public class StatementInterpreter implements Visitor<Void>
 
 	public Void visit(Branch branch)
 	{
-		if (branch.predicate.accept(eval) != 0)
+		if (Integer.parseInt(branch.predicate.accept(eval).toString()) != 0)
 		{
 			symbols = symbols.beginScope();
 			branch.ifBranch.accept(this);
@@ -47,7 +47,7 @@ public class StatementInterpreter implements Visitor<Void>
 
 	public Void visit(Assign assign)
 	{
-		symbols.put(assign.variable.id, (Integer) assign.value.accept(eval));
+		symbols.put(assign.variable.id, assign.value.accept(eval));
 		return null;
 	}
 
@@ -82,6 +82,11 @@ public class StatementInterpreter implements Visitor<Void>
 	}
 
 	public Void visit(Number num)
+	{
+		return null;
+	}
+	
+	public Void visit(Chars str)
 	{
 		return null;
 	}

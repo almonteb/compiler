@@ -25,4 +25,6 @@ public interface Visitor<T>
 	T visit(Divide op);
 
 	T visit(Number num);
+	
+	T visit(Chars str);
 }

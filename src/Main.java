@@ -6,6 +6,7 @@ public class Main
 	/* Static Functions */ 
 	public static Id id (String id) { return new Id (id); }
 	public static Number number (int n) { return new Number (n); }
+	public static Chars chars (String s) { return new Chars (s); }
 	public static Assign assign (Id var, Expression val) { return new Assign (var, val); }
 	public static Block block (Statement... statements) { return new Block (statements); }
 	public static Branch branch (Expression predicate, Statement ifBranch, Statement elseBranch) { return new Branch (predicate, ifBranch, elseBranch); }
@@ -30,6 +31,7 @@ public class Main
 		Node factorial = block(
 				assign(id("factorial"), number(1)),
 				assign(id("i"), number(5)),
+				assign(id("test"), chars("cookies")),
 				loop(id("i"),
 						block(assign(id("factorial"),
 								times(id("factorial"), id("i"))),
