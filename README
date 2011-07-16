@@ -1,1 +1,18 @@
 lab4: c06927d9c662593b40f32b32caca349bcdab308c
+
+Lab 4 Summary
+Ben Kazan, Brendan Almonte, Kevin Swain
+SAK Language
+
+Work Done: 
+Configured Git for all of the collaborators
+Broke AST down into classes to make it easier to work with
+Implemented symbol table in project
+Implemented strings in AST for our language using the Chars class
+Began to implement expressions in AST, did not finish in time for submission deadline
+Updated readme with commit info
+
+Tests:
+Made sure everyone was able to push/pull to repository
+Created strings with the language
+Created some values and printed the symbol table to verify it was working properly
