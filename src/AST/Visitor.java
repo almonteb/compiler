@@ -1,7 +1,5 @@
 package AST;
 
-
-
 public interface Visitor<T>
 {
 	T visit(Loop loop);
