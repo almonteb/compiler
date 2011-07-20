@@ -66,6 +66,10 @@ public class StatementInterpreter implements Visitor<Void>
 	public Void visit(MethodRunner methrun)
 	{
 		symbols = symbols.beginScope();
+		for (String key : symbols.getMeth(methrun).params.keySet())
+		{
+			new Assign(new Id(key), methrun.params.get(key)).accept(this);
+		}
 		symbols.getMeth(methrun).stmt.accept(this);
 		symbols = symbols.closeScope();
 		return null;

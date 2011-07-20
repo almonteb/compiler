@@ -65,7 +65,7 @@ public class Terminals
 		return new Method(name, ret, a, params);
 	}
 	
-	public static MethodRunner dofn(String name, Hashtable<String, String> params)
+	public static MethodRunner dofn(String name, Hashtable<String, Expression> params)
 	{
 		return new MethodRunner(name, params);
 	}
