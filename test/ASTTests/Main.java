@@ -20,8 +20,8 @@ public class Main
 		StatementInterpreter runner = new StatementInterpreter();
 		factorial.accept(runner);
 		
-		assertEquals(runner.symbols.table.get("i"), 0);
-		assertEquals(runner.symbols.table.get("factorial"), 120);
-		assertEquals(runner.symbols.table.get("test"), "cookies");
+		assertEquals(runner.symbols.get("i"), 0);
+		assertEquals(runner.symbols.get("factorial"), 120);
+		assertEquals(runner.symbols.get("test"), "cookies");
 	}
 }

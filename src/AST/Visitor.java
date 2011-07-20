@@ -25,4 +25,10 @@ public interface Visitor<T>
 	T visit(Number num);
 	
 	T visit(Chars str);
+	
+	T visit(Method meth);
+	
+	T visit(MethodRunner methrun);
+	
+	T visit(Return ret);
 }

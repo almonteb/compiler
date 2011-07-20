@@ -1,5 +1,7 @@
 package AST;
 
+import java.util.Hashtable;
+
 public class Terminals
 {
 	public static Id id(String id)
@@ -56,5 +58,20 @@ public class Terminals
 	public static Divide divide(Expression left, Expression right)
 	{
 		return new Divide(left, right);
+	}
+	
+	public static Method declfn(String name, String ret, Block a, Hashtable<String, String> params)
+	{
+		return new Method(name, ret, a, params);
+	}
+	
+	public static MethodRunner dofn(String name, Hashtable<String, String> params)
+	{
+		return new MethodRunner(name, params);
+	}
+	
+	public static Return ret(Expression exp)
+	{
+		return new Return(exp);
 	}
 }

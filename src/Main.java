@@ -18,11 +18,15 @@ public class Main
 		Node factorial = block(
 				assign(id("factorial"), number(1)),
 				assign(id("i"), number(5)),
-				assign(id("test"), chars("cookies")),
+				declfn("testfn", "Void", block(assign(id("asdf"), chars("cookies")))/*ret(times(id("ftemp"), id("itemp")))*/, null),
+				dofn("testfn", null),
 				loop(id("i"),
-						block(assign(id("factorial"),
-								times(id("factorial"), id("i"))),
-								assign(id("i"), minus(id("i"), number(1))))));
+						block(
+								assign(id("factorial"), times(id("factorial"), id("i"))),
+								assign(id("i"), minus(id("i"), number(1)))
+							)
+					)
+				);
 		StatementInterpreter runner = new StatementInterpreter();
 		factorial.accept(runner);
 

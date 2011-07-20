@@ -2,17 +2,20 @@ package AST;
 
 public class StatementInterpreter implements Visitor<Void>
 {
-	//Map<String, Integer> symbols = new HashMap<String, Integer>();
 	public SymbolTable symbols = new SymbolTable();
-	private ExpressionInterpreter eval = new ExpressionInterpreter(symbols);
+	private ExpressionInterpreter eval = new ExpressionInterpreter(this);
 
 	public Void visit(Loop loop)
 	{
+		System.out.println("Start Loop!");
 		symbols = symbols.beginScope();
+		System.out.println("Current val of i: " + symbols.get("i"));
 		while (Integer.parseInt(loop.predicate.accept(eval).toString()) != 0)
 		{
+			System.out.println("Lewp!");
 			loop.body.accept(this);
 		}
+		System.out.println("End Loop!");
 		symbols = symbols.closeScope();
 		return null;
 	}
@@ -36,18 +39,44 @@ public class StatementInterpreter implements Visitor<Void>
 
 	public Void visit(Block block)
 	{
+		symbols = symbols.beginScope();
 		for (Statement s : block.statements)
 		{
-			symbols = symbols.beginScope();
 			s.accept(this);
-			symbols = symbols.closeScope();
 		}
+		symbols = symbols.closeScope();
 		return null;
 	}
 
 	public Void visit(Assign assign)
 	{
-		symbols.put(assign.variable.id, assign.value.accept(eval));
+		if (symbols.containsKey(assign.variable.id))
+		{
+			symbols.set(assign.variable.id, assign.value.accept(eval));
+		}
+		else
+		{
+			symbols.put(assign.variable.id, assign.value.accept(eval));
+		}
+		return null;
+	}
+	
+	public Void visit(Method meth)
+	{
+		symbols.putMeth(meth);
+		return null;
+	}
+	
+	public Void visit(MethodRunner methrun)
+	{
+		symbols = symbols.beginScope();
+		symbols.getMeth(methrun).stmt.accept(this);
+		symbols = symbols.closeScope();
+		return null;
+	}
+	
+	public Void visit(Return ret)
+	{
 		return null;
 	}
 
