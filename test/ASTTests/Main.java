@@ -20,8 +20,15 @@ public class Main
 		StatementInterpreter runner = new StatementInterpreter();
 		factorial.accept(runner);
 		
-		assertEquals(runner.symbols.get("i"), 0);
-		assertEquals(runner.symbols.get("factorial"), 120);
-		assertEquals(runner.symbols.get("test"), "cookies");
+		runner.symbols.printTable();
+		
+		/* Need to check first child... */
+		for(SymbolTable s : runner.symbols.children)
+		{
+			assertEquals(0,         s.get("i"));
+			assertEquals(120,       s.get("factorial"));
+			assertEquals("cookies", s.get("test"));
+		}
+		
 	}
 }

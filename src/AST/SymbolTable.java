@@ -21,35 +21,35 @@ public class SymbolTable
 	public void put(String key, Object obj)
 	{
 		table.put(key, obj);
-		System.out.println("Adding " + key + " to table " + this.hashCode());
+		//System.out.println("Adding " + key + " to table " + this.hashCode());
 	}
 	
 	public void set(String key, Object obj)
 	{
 		if (table.containsKey(key))
 		{
-			System.out.println("Setting " + key + " in table " + this.hashCode());
+			//System.out.println("Setting " + key + " in table " + this.hashCode());
 			table.put(key, obj);
 		}
 		else
 		{
 			if (parent != null)
 			{
-				parent.put(key, obj);
+				parent.set(key, obj);
 			}
 		}
 	}
 	
 	public boolean containsKey(String key)
 	{
-		System.out.println("containsKey " + ((parent != null) ? parent.hashCode() : "no parent"));
+		//System.out.println("containsKey " + ((parent != null) ? parent.hashCode() : "no parent"));
 		if (table.containsKey(key))
 		{
 			return true;
 		}
 		else if (parent != null)
 		{
-			System.out.println("Upping parent");
+			//System.out.println("Upping parent");
 			return parent.containsKey(key);
 		}
 		return false;

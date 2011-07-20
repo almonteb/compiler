@@ -7,15 +7,11 @@ public class StatementInterpreter implements Visitor<Void>
 
 	public Void visit(Loop loop)
 	{
-		System.out.println("Start Loop!");
 		symbols = symbols.beginScope();
-		System.out.println("Current val of i: " + symbols.get("i"));
 		while (Integer.parseInt(loop.predicate.accept(eval).toString()) != 0)
 		{
-			System.out.println("Lewp!");
 			loop.body.accept(this);
 		}
-		System.out.println("End Loop!");
 		symbols = symbols.closeScope();
 		return null;
 	}

@@ -11,15 +11,12 @@ public class ExpressionInterpreter implements Visitor<Object>
 
 	public Object visit(Id id)
 	{
-		System.out.println("Checking table " + this.interp.symbols.hashCode() + " for " + id.id);
 		if (this.interp.symbols.containsKey(id.id))
 		{
-			System.out.println("Found " + id.id + "[" + this.interp.symbols.hashCode() + "]");
 			return this.interp.symbols.get(id.id);
 		}
 		else
 		{
-			System.out.println("Missing " + id.id + "[" + this.interp.symbols.hashCode() + "]");
 			return 0;
 		}
 	}
