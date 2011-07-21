@@ -1,0 +1,20 @@
+/* main class definition */
+PARSER_BEGIN(Numeral)
+public class Numeral{
+        public static void main(String[] args)
+        throws ParseException, TokenMgrError {
+                Numeral numeral = new Numeral(System.in);
+                while (numeral.getNextToken().kind!=EOF);
+        }
+}
+PARSER_END(Numeral)
+
+/* token definitions */
+TOKEN:
+{
+        <ADD: "+">
+|       <SUBTRACT: "-">
+|       <DIVIDE: "/">
+|       <MULTIPLY: "*">
+|       <NUMERAL: (["0"-"9"])+>
+}
