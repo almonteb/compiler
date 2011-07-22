@@ -9,15 +9,25 @@ public interface NumeralConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int ADD = 1;
+  int ADD = 5;
   /** RegularExpression Id. */
-  int SUBTRACT = 2;
+  int SUBTRACT = 6;
   /** RegularExpression Id. */
-  int DIVIDE = 3;
+  int DIVIDE = 7;
   /** RegularExpression Id. */
-  int MULTIPLY = 4;
+  int MULTIPLY = 8;
   /** RegularExpression Id. */
-  int NUMERAL = 5;
+  int INT = 9;
+  /** RegularExpression Id. */
+  int LPAREN = 10;
+  /** RegularExpression Id. */
+  int RPAREN = 11;
+  /** RegularExpression Id. */
+  int EQUALS = 12;
+  /** RegularExpression Id. */
+  int STRING = 13;
+  /** RegularExpression Id. */
+  int QUOTED_STRING = 14;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -25,11 +35,20 @@ public interface NumeralConstants {
   /** Literal token values. */
   String[] tokenImage = {
     "<EOF>",
+    "\" \"",
+    "\"\\t\"",
+    "\"\\r\"",
+    "\"\\n\"",
     "\"+\"",
     "\"-\"",
     "\"/\"",
     "\"*\"",
-    "<NUMERAL>",
+    "<INT>",
+    "\"(\"",
+    "\")\"",
+    "\"=\"",
+    "<STRING>",
+    "<QUOTED_STRING>",
   };
 
 }
