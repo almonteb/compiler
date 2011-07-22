@@ -45,14 +45,15 @@ TOKEN :
 |       <SUBTRACT: "-">
 |       <DIVIDE: "/">
 |       <MULTIPLY: "*">
-|       <INT: (["0"-"9"])+>
+|       <EQUALS: "=">
+|	<OPERATOR: <ADD> | <SUBTRACT> | <DIVIDE> | <MULTIPLY> | <EQUALS>>
 |  	<LPAREN: "(">
 | 	<RPAREN: ")">
 | 	<LBRACE: "{">
 | 	<RBRACE: "}">
-|       <EQUALS: "=">
 |	<STRING : (["A"-"Z", "0"-"9"])+ >
 |	<CHAR : (["A"-"Z"])>
+|	<INT: <DIGIT> (<DIGIT>)*>
 |	<DIGIT : (["0"-"9"])>
 |	<FOR : ("for")>
 |	<IF : ("if")>
@@ -60,18 +61,41 @@ TOKEN :
 |	<PRINT : ("prt")>
 |	<READINT : ("read_int")>
 |	<READSTRING : ("read_str")>
-}
+| 	<IDENTIFIER: <CHAR> (<CHAR>|<DIGIT>)*>
+|	<LLAMBDA : ("=>")>
+| 	<MATHEXP : <INT> <OPERATOR> <INT>>
 
-void Expression() : {} {
-  Factor() (Term() Operator())* | <STRING>
 }
+/*
 void Type() : {} {
   <INT> | <STRING> | <CHAR> | <DIGIT>
 }
-void Factor() : {} {
-  <INT> | <DIGIT>
+void Statement():{}
+{
+	Type() <IDENTIFIER> <EQUALS> Expression() | <IF> Expression()<LBRACE> StatementRest() <RBRACE> | <IF> Expression() <LBRACE> StatementRest() <RBRACE> <ELSE> <LBRACE> StatementRest() <RBRACE>
+	| <FOR> <IDENTIFIER> Expression() StatementRest() | Type()Expression() <IDENTIFIER> <EQUALS> <IDENTIFIER> <LLAMBDA> <LBRACE> StatementRest() <RBRACE>
+	| <READINT> <IDENTIFIER> | <READSTRING> <IDENTIFIER> | <PRINT> Expression() | StatementRest()
 }
-void Operator() : {} {
-  "+" | "-" | "/" | "*" | "="
+void StatementRest():{}
+{
+	Statement() | "null"
+}
+*/
+void Expression():{}
+{
+	<STRING> | <INT> | <IDENTIFIER> | <MATHEXP>
+}
+void Input() :
+{ int count; }
+{
+  count=MatchedBraces() <EOF>
+  { System.out.println("The levels of nesting is " + count); }
+}
+
+int MatchedBraces() :
+{ int nested_count=0; }
+{
+  <LBRACE> [ nested_count=MatchedBraces() ] <RBRACE>
+  { return ++nested_count; }
 }
 

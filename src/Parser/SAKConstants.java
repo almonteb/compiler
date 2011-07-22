@@ -17,35 +17,43 @@ public interface SAKConstants {
   /** RegularExpression Id. */
   int MULTIPLY = 9;
   /** RegularExpression Id. */
-  int INT = 10;
+  int EQUALS = 10;
   /** RegularExpression Id. */
-  int LPAREN = 11;
+  int OPERATOR = 11;
   /** RegularExpression Id. */
-  int RPAREN = 12;
+  int LPAREN = 12;
   /** RegularExpression Id. */
-  int LBRACE = 13;
+  int RPAREN = 13;
   /** RegularExpression Id. */
-  int RBRACE = 14;
+  int LBRACE = 14;
   /** RegularExpression Id. */
-  int EQUALS = 15;
+  int RBRACE = 15;
   /** RegularExpression Id. */
   int STRING = 16;
   /** RegularExpression Id. */
   int CHAR = 17;
   /** RegularExpression Id. */
-  int DIGIT = 18;
+  int INT = 18;
   /** RegularExpression Id. */
-  int FOR = 19;
+  int DIGIT = 19;
   /** RegularExpression Id. */
-  int IF = 20;
+  int FOR = 20;
   /** RegularExpression Id. */
-  int ELSE = 21;
+  int IF = 21;
   /** RegularExpression Id. */
-  int PRINT = 22;
+  int ELSE = 22;
   /** RegularExpression Id. */
-  int READINT = 23;
+  int PRINT = 23;
   /** RegularExpression Id. */
-  int READSTRING = 24;
+  int READINT = 24;
+  /** RegularExpression Id. */
+  int READSTRING = 25;
+  /** RegularExpression Id. */
+  int IDENTIFIER = 26;
+  /** RegularExpression Id. */
+  int LLAMBDA = 27;
+  /** RegularExpression Id. */
+  int MATHEXP = 28;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -62,14 +70,15 @@ public interface SAKConstants {
     "\"-\"",
     "\"/\"",
     "\"*\"",
-    "<INT>",
+    "\"=\"",
+    "<OPERATOR>",
     "\"(\"",
     "\")\"",
     "\"{\"",
     "\"}\"",
-    "\"=\"",
     "<STRING>",
     "<CHAR>",
+    "<INT>",
     "<DIGIT>",
     "\"for\"",
     "\"if\"",
@@ -77,6 +86,9 @@ public interface SAKConstants {
     "\"prt\"",
     "\"read_int\"",
     "\"read_str\"",
+    "<IDENTIFIER>",
+    "\"=>\"",
+    "<MATHEXP>",
   };
 
 }
