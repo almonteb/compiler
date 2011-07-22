@@ -1,0 +1,77 @@
+options
+{
+    STATIC = false ;
+}
+PARSER_BEGIN (SAK)
+import java.io.StringReader;
+import java.io.Reader;
+
+public class SAK {
+
+/**  
+  A String based constructor for ease of use.
+  **/
+    public SAK(String s) 
+    {
+        this((Reader)(new StringReader(s))); 
+        
+    }
+       
+    public static void main(String args[])
+    {
+        try
+        {
+              String test = args[0];
+              SAK parser = new SAK(test);
+              parser.parse();
+        }
+        catch(Exception e)
+        {
+              e.printStackTrace();
+        }
+    }
+}
+PARSER_END (SAK)
+
+SKIP :     //spaces and things to ignore                         
+{
+	" " | "\t" | "\r" | "\n" | "\f"
+}
+
+/* token definitions */
+TOKEN :
+{
+        <ADD: "+">
+|       <SUBTRACT: "-">
+|       <DIVIDE: "/">
+|       <MULTIPLY: "*">
+|       <INT: (["0"-"9"])+>
+|  	<LPAREN: "(">
+| 	<RPAREN: ")">
+| 	<LBRACE: "{">
+| 	<RBRACE: "}">
+|       <EQUALS: "=">
+|	<STRING : (["A"-"Z", "0"-"9"])+ >
+|	<CHAR : (["A"-"Z"])>
+|	<DIGIT : (["0"-"9"])>
+|	<FOR : ("for")>
+|	<IF : ("if")>
+|	<ELSE : ("else")>
+|	<PRINT : ("prt")>
+|	<READINT : ("read_int")>
+|	<READSTRING : ("read_str")>
+}
+
+void Expression() : {} {
+  Factor() (Term() Operator())* | <STRING>
+}
+void Type() : {} {
+  <INT> | <STRING> | <CHAR> | <DIGIT>
+}
+void Factor() : {} {
+  <INT> | <DIGIT>
+}
+void Operator() : {} {
+  "+" | "-" | "/" | "*" | "="
+}
+
