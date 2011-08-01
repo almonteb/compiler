@@ -1,0 +1,41 @@
+"Start Symbol"   = <Statements>
+
+{String Ch 1} = {Printable} - ['']
+
+Id            = {Letter}{AlphaNumeric}*
+
+! String allows single quotes
+
+StringLiteral = ''   {String Ch 1}* ''
+
+
+NumberLiteral = {Digit}+('.'{Digit}+)?
+
+<Statements> ::= <Statement> <Statements>
+               | <Statement>
+
+<Statement>  ::= display <Expression>
+               | display <Expression> read ID
+               | assign ID '=' <Expression>
+                | assign ID '=>' <Expression>
+               | if <Expression> then <Statements> end
+               | if <Expression> then <Statements> else <Statements> end
+               
+<Expression>   ::= <Add Exp> 
+        | <Value>
+
+<Add Exp>      ::= <Add Exp> '+' <Mult Exp>
+                 | <Add Exp> '-' <Mult Exp>
+                 | <Mult Exp> 
+
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
+                | <Mult Exp> '/' <Negate Exp> 
+                | <Negate Exp> 
+
+<Negate Exp>  ::= '-' <Value> 
+                | <Value> 
+
+<Value>       ::= ID           
+                | StringLiteral
+                | NumberLiteral
+                | '(' <Expression> ')'
