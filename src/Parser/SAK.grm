@@ -27,6 +27,7 @@ NumberLiteral = {Digit}+('.'{Digit}+)?
                
 <Expression>   ::= <Expression> '>'  <Add Exp> 
                  | <Expression> '<'  <Add Exp> 
+                 | <Expression> '='  <Add Exp> 
                  | <Add Exp> 
 
 <Add Exp>      ::= <Add Exp> '+' <Mult Exp>
