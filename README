@@ -16,3 +16,12 @@ Tests:
 Made sure everyone was able to push/pull to repository
 Created strings with the language
 Created some values and printed the symbol table to verify it was working properly
+
+lab5: e0d1d73d77ee078b1955
+
+Lab 5 summary -
+
+Worked with the gold parser builder to successfully write a grammar and parse sample code.
+
+Tested using 
+for (a < 1) loop { a => 2 + 3} end for
