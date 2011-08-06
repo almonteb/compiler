@@ -1,36 +1,39 @@
+"Name"    = 'SAK'
+"Author"  = 'Ben Kazan Kevin Swain Brendan Almonte'
+
+"Case Sensitive" = False 
 "Start Symbol"   = <Statements>
 
 {String Ch 1} = {Printable} - ['']
 
-Id            = {Letter}{AlphaNumeric}* |{Letter}
-
-! String allows single quotes
+Id            = {Letter}{AlphaNumeric}*
 
 StringLiteral = ''   {String Ch 1}* ''
 
-
 NumberLiteral = {Digit}+('.'{Digit}+)?
 
-<Statements> ::= <Statement> <Statements> end
-               | <Statement> end
+<Statements> ::= <Statement> <Statements>
+               | <Statement>
 
-<Statement>  ::= <Expression> end
-               | <Expression> read ID end
-               | <Type> <Value> '=' <Expression> end
-               | <Type> <Value> '=>' <Expression> end
-               | if <Expression> then <Statements> end
-               | if <Expression> then <Statements> else <Statements> end
-               
-<Expression>   ::= <Add Exp> end
-        | <Value> end
+<Statement>  ::= <Type> <Value> '=' <Expression>
+               | <Type> <Value> '=>' <Expression>
+               | <Value> '=' <Expression>
+               | <Value> '=>' <Expression>
+               | if '('<Expression>')' '{'<Statements>'}' end
+               | if '('<Expression>')' '{'<Statements>'}'else '{'<Statements>'}' end
+               | for'('<Expression>')' loop '{'<Statements>'}' end for
 
 <Type> ::= int | string
+               
+<Expression>   ::= <Expression> '>'  <Add Exp> 
+                 | <Expression> '<'  <Add Exp> 
+                 | <Add Exp> 
 
 <Add Exp>      ::= <Add Exp> '+' <Mult Exp>
                  | <Add Exp> '-' <Mult Exp>
                  | <Mult Exp> 
 
-<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp>
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
                 | <Mult Exp> '/' <Negate Exp> 
                 | <Negate Exp> 
 
@@ -40,4 +43,3 @@ NumberLiteral = {Digit}+('.'{Digit}+)?
 <Value>       ::= ID           
                 | StringLiteral
                 | NumberLiteral
-                | '(' <Expression> ')'
